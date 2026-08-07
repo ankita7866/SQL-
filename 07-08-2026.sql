@@ -144,7 +144,7 @@ select truncate(123.45678,-3);
 select truncate(123.45678,0);
 select dept,truncate(avg(age),0) from emp group by dept;
 use employee;
-select distinct age from emp;
+select istinct age from emp;
 show tables;
 select distinct gender,dept from emp;
 select * from emp where age not in (23,28);
@@ -170,6 +170,32 @@ select city,count(*) from address group by city having count(*)>1;
 select * from projects;
 select datediff(enddate,startdate) as Duration,count(*) from projects group by Duration having count(*)>=1;
 select datediff(enddate,startdate) as Duration,count(*) from projects where employeeid>1004 group by Duration having count(*)>=2;
+show databases;
+use employee;
+create table voterlist
+(voterid int primary key,name varchar(50),age int check(age>=18));
+insert into voterlist values (206,"Anju",18);
+insert into voterlist values (206,"w",16);
+create table voterlist2
+(voterid int primary key,name varchar(50),age int check(age>=18),emailid varchar(30) default "dummy@gmail.com");
+insert into voterlist2 values (128,"ram",19,'ramu@gmail.com'),(129,"sham",19,default);
+select * from voterlist2;
+insert into voterlist2 values (125,"",19,'ramu@gmail.com');
+select * from voterlist2;
+/*/--// insert into voterlist2 values (125,"jamie",,'ramu@gmail.com');*/
+select * from emp;
+select *,concat(fullname,".",dept) as code from emp;
+select fullname,lower(fullname) from emp;
+select fullname,upper(fullname) from emp;
+select fullname,replace(fullname,"Mohanty","kulkarni") as new from emp;
+update emp set fullname = "Anurag kulkarni" where fullname= "Anurag Mohanty";
+select * from emp; 
+update emp set fullname = "Sambit kulkarni" where EmployeeId = 1008;
+select * from emp;
+select *,length(fullname) from emp;
+select substring("John Doe",1,3);
+select *,concat(dept,".",substring(fullname,1,3)) as code from emp;
+
 
 
 
