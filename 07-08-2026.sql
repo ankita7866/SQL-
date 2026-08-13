@@ -195,9 +195,75 @@ select * from emp;
 select *,length(fullname) from emp;
 select substring("John Doe",1,3);
 select *,concat(dept,".",substring(fullname,1,3)) as code from emp;
-
-
-
+use employee;
+select * from emp;
+select (fullname),reverse(fullname) from emp;
+select abs(-55);
+select * from projects;
+select datediff(enddate,startdate) as duration from projects;
+select abs(datediff(startdate,enddate)) as druation from projects;
+select mod(12,10);
+select floor(12.8),ceiling(12.8);
+select truncate(12.456743333,-1);
+select exp(2);
+select pow(2,3);
+select sqrt(121);
+select curdate();
+select now();
+select sysdate();
+select last_day(now());
+select last_day("2026-02-22");
+select date_format(now(),"%b");
+select date_format(now(),"%M");
+select date_format(now(),"%y");
+select date_format(now(),"%Y");
+select date_format(now(),"%a");
+select date_format(now(),"%a %D-%M,%Y");
+select date_format(now(),"%b/%T");
+Select date_format("2026-11-14","%D-%M-%Y,%W") as date;
+select datediff(now(),"2023-11-14")as Days;
+select count(gender) from emp;
+Select max(salary) from emp where gender="Male";
+Select sum(salary) from emp where gender="Male";
+use employee; 
+show tables;
+select * from emp;
+select emp.EmployeeId,fullname,city from emp left join address
+on emp.EmployeeId=address.EmployeeID;
+select Projects.EmployeeId,projectName,city from projects right join address on
+projects.EmployeeId=address.EmployeeId;
+select emp.EmployeeId,fullname,city from address right join emp
+on emp.EmployeeId=address.EmployeeID;
+select emp.EmployeeId,fullname,ProjectName,datediff(EndDate,StartDate) as Duration from emp left join projects on
+emp.EmployeeId=projects.EmployeeId;
+select ProjectName,fullname from projects as p left join emp as e on p.EmployeeId=e.EmployeeId;
+select fullname,projectname,state from emp as E left join projects as P on 
+E.EmployeeId=P.EmployeeId 
+left join address as A on A.EmployeeId=E.EmployeeId;
+select emp.EmployeeId,fullname,dept,Gender,ProjectName,datediff(Enddate,Startdate) as Duration,Country,State from emp left join projects on emp.EmployeeId=projects.EmployeeID
+left join address on emp.EmployeeId=projects.EmployeeId;
+use employee;
+select dept from emp where EmployeeId=1001;
+select fullname,dept from emp where dept="IT";
+select fullname,dept from emp where dept= (select dept from emp where EmployeeId=1001);
+select fullname,age from emp where age= (select age from emp where EmployeeId=1003);
+select ProjectName,datediff(EndDate,StartDate) as duration from projects where datediff(EndDate,StartDate) = 
+(select datediff(EndDate,StartDate) from projects where EmployeeId=1004);
+select fullname,Salary from emp where Salary= (select max(Salary) from emp);
+select fullname,Salary from emp where salary= (select max(Salary) where salary<(select max(Salary) from emp));
+use employee;
+select fullname,salary from emp where salary in (select salary from emp where fullname="Mary Smith" or fullname="James Brown");
+select fullname,salary from emp where salary in (select salary from emp where fullname in ("Mary Smith","James Brown") )
+and fullname not in ("Mary Smith","James Brown") ;
+select * from emp;
+select * from emp where age < any(select age from emp where fullname in ("Anurag Kulkarni","Mary Smith"));
+select * from emp where age < (select age from emp where fullname="Anurag Kulkarni") or
+ age < (select age from emp where fullname in ("Mary Smith"));
+select * from emp where age < all(select age from emp where fullname in ("James Brown","Mary Smith"));
+  
+ 
+ 
+ 
 
 
 
