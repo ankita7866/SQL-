@@ -260,10 +260,12 @@ select * from emp where age < any(select age from emp where fullname in ("Anurag
 select * from emp where age < (select age from emp where fullname="Anurag Kulkarni") or
  age < (select age from emp where fullname in ("Mary Smith"));
 select * from emp where age < all(select age from emp where fullname in ("James Brown","Mary Smith"));
-  
- 
- 
- 
-
-
-
+ use employee; 
+ alter table emp modify dept varchar(37);
+ desc emp;
+ update emp set salary = salary+100;
+ select * from emp;
+create view my_join as
+select emp.EmployeeId,fullname,ProjectName from emp left join projects on
+emp.EmployeeID=projects.EmployeeId order by emp.EmployeeId;
+select * from my_join;
